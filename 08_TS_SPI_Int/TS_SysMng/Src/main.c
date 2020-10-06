@@ -80,12 +80,11 @@ void main(void)
     InitGpio();
 
 
-    //
-    // Step 2. Initialize GPIO:
-    // This example function is found in the F2837xD_Gpio.c file and
-    // illustrates how to set the GPIO to it's default state.
-    // Setup only the GP I/O only for SPI-A functionality
-    //
+    /*This example function is found in the F2837xD_Gpio.c file and
+     * illustrates how to set the GPIO to it's default state.
+     * Setup only the GP I/O only for SPI-A functionality
+     * */
+
     InitSpiaGpio();
 
     /* Globally disable maskable CPU interrupts */
@@ -151,20 +150,7 @@ void main(void)
 
 }
 
-//
-// delay_loop - Function to provide delay
-//
-//void delay_loop()
-//{
-//    long i;
-//    for (i = 0; i < 1000000; i++)
-//    {
-//    }
-//}
 
-//
-// error - Function to halt debugger on error
-//
 void error(void)
 {
     asm("     ESTOP0");
@@ -172,10 +158,12 @@ void error(void)
     for (;;)
         ;
 }
-
-//
-// spi_fifo_init - Initialize SPI FIFO
-//
+/**********************************************************************************
+ * \function:       spi_fifo_init
+ * \brief           spi_fifo_init - Initialize SPI FIFO
+ * \param[in]       void
+ * \return          void
+ **********************************************************************************/
 void spi_fifo_init()
 {
     /* Initialize SPI FIFO registers
@@ -189,15 +177,15 @@ void spi_fifo_init()
     SpiaRegs.SPIFFTX.bit.TXFIFO = 1;
     SpiaRegs.SPIFFRX.bit.RXFIFORESET = 1;
 
-    //
-    // Initialize core SPI registers
-    //
+    /* Initialize core SPI registers */
     InitSpi();
 }
-
-//
-// spiTxFifoIsr - ISR for SPI transmit FIFO
-//
+/**********************************************************************************
+ * \function:       spiTxFifoIsr
+ * \brief           spiTxFifoIsr - ISR for SPI transmit FIFO
+ * \param[in]       void
+ * \return          void
+ **********************************************************************************/
 interrupt void spiTxFifoIsr(void)
 {
     Uint16 i;
@@ -214,10 +202,12 @@ interrupt void spiTxFifoIsr(void)
     SpiaRegs.SPIFFTX.bit.TXFFINTCLR = 1;  // Clear Interrupt flag
     PieCtrlRegs.PIEACK.all |= 0x20;       // Issue PIE ACK
 }
-
-//
-// spiRxFifoIsr - ISR for SPI receive FIFO
-//
+/**********************************************************************************
+ * \function:       spiRxFifoIsr
+ * \brief           spiRxFifoIsr - ISR for SPI receive FIFO
+ * \param[in]       void
+ * \return          void
+ **********************************************************************************/
 interrupt void spiRxFifoIsr(void)
 {
     Uint16 i;
@@ -240,8 +230,3 @@ interrupt void spiRxFifoIsr(void)
     SpiaRegs.SPIFFRX.bit.RXFFINTCLR = 1;  // Clear Interrupt flag
     PieCtrlRegs.PIEACK.all |= 0x20;       // Issue PIE ack
 }
-
-//
-// End of file
-//
-
