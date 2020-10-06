@@ -36,7 +36,11 @@
  * Function prototypes
  *
  ***********************************************************************************/
-
+interrupt void spiTxFifoIsr(void);
+interrupt void spiRxFifoIsr(void);
+//void delay_loop(void);
+void spi_fifo_init(void);
+void error();
 
 
 #endif /* TS_SYSMNG_INI_MAIN_H_ */

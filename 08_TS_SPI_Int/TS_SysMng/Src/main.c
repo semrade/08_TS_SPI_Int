@@ -45,22 +45,13 @@
  *
  *********************************************************************************/
 
-//
-// Globals
-//
+/**********************************************************************************
+ *  Globals
+ *
+ *********************************************************************************/
 Uint16 sdata[100];     // Send data buffer
 Uint16 rdata[100];     // Receive data buffer
 Uint16 rdata_point;   // Keep track of where we are
-// in the data stream to check received data
-
-//
-// Function Prototypes
-//
-interrupt void spiTxFifoIsr(void);
-interrupt void spiRxFifoIsr(void);
-//void delay_loop(void);
-void spi_fifo_init(void);
-void error();
 
 /**********************************************************************************
  * \function:       main
@@ -149,8 +140,12 @@ void main(void)
     }
 
 }
-
-
+/**********************************************************************************
+ * \function:       error
+ * \brief
+ * \param[in]       void
+ * \return          void
+ **********************************************************************************/
 void error(void)
 {
     asm("     ESTOP0");
