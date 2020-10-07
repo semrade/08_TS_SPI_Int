@@ -70,7 +70,6 @@ void main(void)
     /* Init all gpio to input */
     InitGpio();
 
-
     /*This example function is found in the F2837xD_Gpio.c file and
      * illustrates how to set the GPIO to it's default state.
      * Setup only the GP I/O only for SPI-A functionality
@@ -136,7 +135,8 @@ void main(void)
 
     while (1)
     {
-        asm(" NOP");
+
+
     }
 
 }
